@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ge You — Portfolio</title>
+  <style>
+    :root{
+      --bg:#0a0a0a;--fg:#f2f2f2;--muted:#a0a0a0;--accent:#7c3aed;--accent-2:#22d3ee;
+      --maxw:1100px;--pad:clamp(16px,2vw,28px);
+    }
+    html{scroll-behavior:smooth}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* --- Layout --- */
+    .shell{max-width:var(--maxw);margin:0 auto;}
+    header.hero{position:relative;min-height:100svh;display:grid;align-items:stretch}
+    .hero-media{position:absolute;inset:0;overflow:hidden}
+    .hero-media::after{ /* subtle dark overlay for legibility */
+      content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.65));
+    }
+    .hero-media iframe,.hero-media embed{position:absolute;inset:0;width:100%;height:100%;border:0;filter:contrast(1.05) saturate(1.02)}
+
+    .hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto;gap:clamp(16px,3vw,32px);padding:var(--pad);align-items:end}
+    .brand{display:flex;flex-direction:column;gap:8px;padding:var(--pad);}
+    .brand h1{margin:0;font-weight:800;letter-spacing:.02em;line-height:1}
+    .brand .gey{font-size:clamp(42px,8vw,112px)}
+    .brand .port{font-size:clamp(24px,4.5vw,64px);opacity:.9}
+    .brand p{max-width:55ch;color:var(--muted);margin:.25rem 0 0}
+
+    /* Right rail (sticky) */
+    .rail{position:relative;padding:var(--pad)}
+    .rail-inner{position:sticky;bottom:var(--pad);right:0;display:flex;flex-direction:column;gap:10px;align-items:end}
+    .jump{display:inline-flex;gap:10px;align-items:center;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.06);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.08);transition:.2s}
+    .jump:hover{transform:translateX(-3px);background:rgba(255,255,255,.1)}
+    .dot{width:6px;height:6px;border-radius:50%;background:var(--accent-2)}
+    .jump small{color:var(--muted)}
+
+    /* Sections */
+    section{padding:clamp(64px,12svh,128px) var(--pad);border-top:1px solid rgba(255,255,255,.06)}
+    section .wrap{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(18px,3.5vw,40px)}
+    section h2{margin:0 0 10px;font-size:clamp(22px,3vw,36px)}
+    section p{color:var(--muted);margin:0 0 12px}
+    .card{border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;background:rgba(255,255,255,.03)}
+    .card .c-body{padding:16px}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+
+    footer{padding:64px var(--pad);text-align:center;color:var(--muted)}
+
+    /* --- Animations --- */
+    .reveal{opacity:0;transform:translateY(8px);}
+    .reveal.show{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
+
+    /* Title letter fade-in (staggered) */
+    .letters{display:inline-grid;grid-auto-flow:column;gap:.02em}
+    .letters span{opacity:0;transform:translateY(.3em);display:inline-block}
+    .letters.ready span{animation:pop .9s cubic-bezier(.2,.7,0,1) forwards}
+    @keyframes pop{to{opacity:1;transform:none}}
+
+    /* small screens */
+    @media (max-width:860px){
+      .hero-inner{grid-template-columns:1fr}
+      .rail{order:-1}
+      .rail-inner{flex-direction:row;flex-wrap:wrap;gap:8px;justify-content:flex-start}
+      section .wrap{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="hero-media" aria-hidden="true">
+      <!-- Option A (quick): show page 1 of the PDF as the background using the browser PDF renderer.  -->
+      <embed src="assets/YouGe-Portfolio.pdf#page=1&view=FitH" type="application/pdf" />
+      <!-- Option B (recommended for performance): replace the <embed> above with an exported JPG/PNG of page 1, e.g.:
+      <img src="assets/YouGe-Portfolio-page1.jpg" alt="Portfolio cover" />
+      -->
+    </div>
+
+    <div class="hero-inner shell">
+      <div class="brand">
+        <h1 class="reveal">
+          <span class="gey letters" aria-label="geYou"></span>
+        </h1>
+        <h1 class="reveal">
+          <span class="port letters" aria-label="portfolio"></span>
+        </h1>
+        <p class="reveal">Interactive digital media • video • design • code</p>
+      </div>
+
+      <aside class="rail">
+        <nav class="rail-inner">
+          <a class="jump" href="#music"><span class="dot"></span><span>Music Video<br><small>edits & visualizers</small></span></a>
+          <a class="jump" href="#team"><span class="dot"></span><span>Team Project<br><small>USTB Student TV</small></span></a>
+          <a class="jump" href="#graphic"><span class="dot"></span><span>Graphic Design<br><small>posters & layout</small></span></a>
+          <a class="jump" href="#photo"><span class="dot"></span><span>Photography<br><small>portraits etc.</small></span></a>
+        </nav>
+      </aside>
+    </div>
+  </header>
+
+  <!-- SECTIONS (same page) -->
+  <section id="music">
+    <div class="wrap">
+      <div>
+        <h2 class="reveal">Music Video</h2>
+        <p class="reveal">Short edits for fan-made interactive story game intros, lyric visualizers, and more.</p>
+      </div>
+      <div class="grid reveal">
+        <!-- Replace with your own thumbnails/links -->
+        <a class="card" href="https://www.youtube.com/watch?v=b0k29velBHI" target="_blank" rel="noopener">
+          <img src="assets/thumbs/mv-1.jpg" alt="AHS inspired intro"/>
+          <div class="c-body">AHS‑inspired intro</div>
+        </a>
+        <a class="card" href="https://www.youtube.com/watch?v=_IncEnwR3mQ" target="_blank" rel="noopener">
+          <img src="assets/thumbs/mv-2.jpg" alt="Art Deco edit"/>
+          <div class="c-body">Art Deco — Lana Del Rey</div>
+        </a>
+        <a class="card" href="https://youtu.be/XdbFaa01j_M" target="_blank" rel="noopener">
+          <img src="assets/thumbs/mv-3.jpg" alt="Lyrics visualizer"/>
+          <div class="c-body">Lyrics visualizer</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="team">
+    <div class="wrap">
+      <div>
+        <h2 class="reveal">Team Project — USTB Student TV</h2>
+        <p class="reveal">Street interviews, tech‑focused videos, and channel management.</p>
+      </div>
+      <div class="grid reveal">
+        <a class="card" href="https://youtu.be/sXuNMjmIRP8" target="_blank" rel="noopener">
+          <img src="assets/thumbs/team-1.jpg" alt="Street Interview"/>
+          <div class="c-body">Street Interview — Date with Spring</div>
+        </a>
+        <a class="card" href="https://space.bilibili.com/390835775" target="_blank" rel="noopener">
+          <img src="assets/thumbs/team-2.jpg" alt="Bilibili channel"/>
+          <div class="c-body">Bilibili Channel (Gio Team)</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="graphic">
+    <div class="wrap">
+      <div>
+        <h2 class="reveal">Graphic Design</h2>
+        <p class="reveal">Digital/print posters, article layouts, and seasonal campaigns.</p>
+      </div>
+      <div class="grid reveal">
+        <article class="card">
+          <img src="assets/thumbs/gd-1.jpg" alt="Layout design"/>
+          <div class="c-body">Layout Design — Warner Chappell Music</div>
+        </article>
+        <article class="card">
+          <img src="assets/thumbs/gd-2.jpg" alt="Mid-autumn card"/>
+          <div class="c-body">Mid‑Autumn Festival Gift Card</div>
+        </article>
+        <article class="card">
+          <img src="assets/thumbs/gd-3.jpg" alt="3D render"/>
+          <div class="c-body">3D rendering studies</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="photo">
+    <div class="wrap">
+      <div>
+        <h2 class="reveal">Photography</h2>
+        <p class="reveal">Mostly portraits; occasional documentary & experimental shots.</p>
+      </div>
+      <div class="grid reveal">
+        <article class="card">
+          <img src="assets/thumbs/ph-1.jpg" alt="Portrait 1"/>
+          <div class="c-body">Portrait study</div>
+        </article>
+        <article class="card">
+          <img src="assets/thumbs/ph-2.jpg" alt="Portrait 2"/>
+          <div class="c-body">Natural light</div>
+        </article>
+        <article class="card">
+          <img src="assets/thumbs/ph-3.jpg" alt="Portrait 3"/>
+          <div class="c-body">Low‑key experiment</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© <span id="y"></span> Ge You. Built as a single‑page portfolio. <a href="#top">Back to top ↑</a></p>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Intersection reveal
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } });
+    },{threshold:0.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // Staggered letters for animated titles
+    function mountLetters(sel){
+      document.querySelectorAll(sel).forEach(box=>{
+        const text = box.getAttribute('aria-label')||box.textContent.trim();
+        box.textContent = '';
+        [...text].forEach((ch,i)=>{
+          const s = document.createElement('span');
+          s.textContent = ch; s.style.animationDelay = (i*60)+'ms';
+          box.appendChild(s);
+        });
+        requestAnimationFrame(()=> box.classList.add('ready'));
+      });
+    }
+    mountLetters('.letters');
+
+    // Optional: highlight active nav as you scroll
+    const sections = [...document.querySelectorAll('section')];
+    const navLinks = [...document.querySelectorAll('.rail a')];
+    const spy = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          const id = '#'+e.target.id;
+          navLinks.forEach(a=>a.classList.toggle('active', a.getAttribute('href')===id));
+        }
+      })
+    },{rootMargin:'-40% 0px -55% 0px', threshold:0});
+    sections.forEach(s=>spy.observe(s));
+  </script>
+</body>
+</html>
